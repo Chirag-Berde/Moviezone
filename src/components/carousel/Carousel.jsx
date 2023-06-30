@@ -14,7 +14,7 @@ import CircleRating from "../circlerating/CircleRating";
 import Genres from "../genres/Genres";
 
 
-const Carousel = ({ data, loading }) => {
+const Carousel = ({ data, loading ,endpoint}) => {
     const caraouselContainer = useRef()
     const { url } = useSelector(state => state.home)
     const navigate = useNavigate()
@@ -52,7 +52,7 @@ const Carousel = ({ data, loading }) => {
                     {data?.map((item) => {
                         const poster = item.poster_path ? url.poster + item.poster_path : PosterFallback
                         return (
-                            <div key={item.id} className="carouselItem" onClick={()=>navigate(`/${item.media_type}/${item.id}`)}>
+                            <div key={item.id} className="carouselItem" onClick={()=>navigate(`/${item.media_type || endpoint}/${item.id}`)}>
                                 <div className="posterBlock">
                                     <Img src={poster} />
                                     <CircleRating rating={item.vote_average.toFixed(1)} />
