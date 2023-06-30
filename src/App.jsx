@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { fetchData } from './utils/api.js'
 import { useSelector, useDispatch } from 'react-redux'
-import { getApiConfiguration,getGeneres } from './store/homeSlice.js'
+import { getApiConfiguration, getGeneres } from './store/homeSlice.js'
 import Header from './components/header/Header'
 import Footer from './components/footer/Footer'
 import Home from './pages/home/Home'
@@ -31,31 +31,31 @@ function App() {
       dispatch(getApiConfiguration(url))
     })
   }
-  const genresCall=async()=>{
-    let promises=[]
-    let endpoints=["tv","movie"]
-    let allGenres={}
-    endpoints.forEach((url)=>{
+  const genresCall = async () => {
+    let promises = []
+    let endpoints = ["tv", "movie"]
+    let allGenres = {}
+    endpoints.forEach((url) => {
       return promises.push(fetchData(`/genre/${url}/list`))
     })
-    const data=await Promise.all(promises)
+    const data = await Promise.all(promises)
     console.log(data)
-    data.map(({genres})=>{
-         return genres.map((item)=>allGenres[item.id]=item)
+    data.map(({ genres }) => {
+      return genres.map((item) => allGenres[item.id] = item)
     })
     dispatch(getGeneres(allGenres))
   }
   return (
     <BrowserRouter>
-      <Header/>
+      <Header />
       <Routes>
         <Route path='/' element={<Home />}></Route>
-        <Route path='/:mediaType/:id'></Route>
+        <Route path='/:mediaType/:id' element={<Details />}></Route>
         <Route path='/search/:query' element={<SearchResult />}></Route>
         <Route path='/explore/:mediaType' element={<Explore />}></Route>
         <Route path='*' element={Notfound} />
       </Routes>
-      <Footer/>
+      <Footer />
     </BrowserRouter>
   )
 }
