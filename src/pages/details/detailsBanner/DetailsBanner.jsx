@@ -7,18 +7,22 @@ import ContentWrapper from "../../../components/contentWrapper/ContentWrapper";
 import useFetch from "../../../hooks/useFetch";
 import Genres from "../../../components/genres/Genres";
 import CircleRating from "../../../components/circlerating/CircleRating";
-import Img from "../../../components/lazyloadimage/Img";
 import PosterFallback from "../../../assets/no-poster.png";
 import { Playbutton } from "../Playbutton";
+import VideoPopup from "../../../components/videopopup/VideoPopup";
+import Img from "../../../components/lazyLoadImage/Img";
+
 
 const DetailsBanner = ({ video, crew }) => {
+    const [show, setShow] = useState(false)
+    const [videoId, setVideoId] = useState(null)
     const { mediaType, id } = useParams()
     const { data, loading } = useFetch(`/${mediaType}/${id}`)
     const { url } = useSelector(state => state.home)
     const _genres = data?.genres.map(item => item.id)
     const director = crew?.filter(item => item.job === "Director")
     const writer = crew?.filter(item => item.job === "Screenplay" || item.job === "Story" || item.job === "Writer")
-    console.log(director)
+
     const toHoursAndMinutes = (totalMinutes) => {
         const hours = Math.floor(totalMinutes / 60);
         const minutes = totalMinutes % 60;
@@ -49,7 +53,10 @@ const DetailsBanner = ({ video, crew }) => {
                                         <Genres data={_genres} />
                                         <div className="row">
                                             <CircleRating rating={data.vote_average.toFixed(1)} />
-                                            <div className="playbtn" onclick={() => { }}>
+                                            <div className="playbtn" onClick={() => { 
+                                                setShow(true)
+                                                setVideoId(video.key)
+                                                }}>
                                                 <Playbutton /> Watch Trailer
                                             </div>
                                         </div>
@@ -85,7 +92,7 @@ const DetailsBanner = ({ video, crew }) => {
                                             {data.runtime && (
                                                 <div className="infoItem">
                                                     <span className="text bold">
-                                                        Release Date: {" "}
+                                                        Runtime: {" "}
                                                     </span>
                                                     <span className="text">
                                                         {toHoursAndMinutes(data.runtime)}
@@ -98,19 +105,49 @@ const DetailsBanner = ({ video, crew }) => {
                                                 <span className="text bold">
                                                     Director :{" "}
                                                 </span>
-                                                <span>
-                                                    {director.map((d, index) => {
-                                                        <span key={index}>
-                                                            {d.name}
+                                                <span className="text">
+                                                    {director?.map((item, index) => {
+                                                        return <span key={index}>
+                                                            {item.name}
                                                             {director.length - 1 !== index && ", "}
                                                         </span>
-
+                                                    })}
+                                                </span>
+                                            </div>
+                                        )}
+                                        {writer?.length > 0 && (
+                                            <div className="info">
+                                                <span className="text bold">
+                                                    Writer:{" "}
+                                                </span>
+                                                <span className="text">
+                                                    {writer?.map((item, index) => {
+                                                        return <span key={index}>
+                                                            {item.name}
+                                                            {writer.length - 1 !== index && ", "}
+                                                        </span>
+                                                    })}
+                                                </span>
+                                            </div>
+                                        )}
+                                        {data?.created_by?.length > 0 && (
+                                            <div className="info">
+                                                <span className="text bold">
+                                                    Creator :{" "}
+                                                </span>
+                                                <span className="text">
+                                                    {data?.created_by?.map((item, index) => {
+                                                        return <span key={index}>
+                                                            {item.name}
+                                                            {data?.created_by.length - 1 !== index && ", "}
+                                                        </span>
                                                     })}
                                                 </span>
                                             </div>
                                         )}
                                     </div>
                                 </div>
+                                <VideoPopup show={show} setShow={setShow} videoId={videoId} setVideoId={setVideoId} />
                             </ContentWrapper>
                         </div>
                     </>)}
