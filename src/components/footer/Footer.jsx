@@ -5,7 +5,7 @@ import {
     FaTwitter,
     FaLinkedin,
 } from "react-icons/fa";
-
+import logo from "../../assets/movieZone-logo.png"
 import ContentWrapper from "../contentWrapper/ContentWrapper";
 import './footer.scss'
 
@@ -13,9 +13,9 @@ const Footer = () => {
     return (
         <footer className="footer">
             <ContentWrapper>
-                <div className="myName"><strong> Chirag.B</strong></div>
+                <div className="myName"><img src={logo} alt="" /></div>
                 <div className="infoText">
-                With Prime Video Channels, find shows and movies from your favorite channels all in one place. Enjoy with an add-on subscription to Channels of your choice.Early Access to new movies & TV shows, before digital subscription.
+                With Movie CluB Channels, find shows and movies from your favorite channels all in one place. Enjoy with an add-on subscription to Channels of your choice.Early Access to new movies & TV shows, before digital subscription.
                 </div>
                 <div className="socialIcons">
                     <a href="https://www.facebook.com/chirag.berde" target="_blank" className="icon">

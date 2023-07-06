@@ -14,9 +14,14 @@
 
     .myName {
         margin-bottom: 20px;
-        font-size: 20px;
-        font-weight: 800;
-        font-style: italic;
+        img {
+            height: 60px;
+            width: 60px;
+            &:hover{
+                cursor: pointer;
+            }
+        }
+        
     }
 
     .infoText {
