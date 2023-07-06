@@ -3,8 +3,8 @@ import './herobanner.scss'
 import { useNavigate } from 'react-router-dom'
 import useFetch from '../../../hooks/useFetch'
 import { useSelector } from 'react-redux'
-import Img from '../../../components/lazyloadimage/Img'
 import ContentWrapper from '../../../components/contentWrapper/ContentWrapper'
+import Img from '../../../components/lazyLoadImage/Img'
 const Herobanner = () => {
   const [background, setBackground] = useState('')
   const [query, setQuery] = useState('')
@@ -17,7 +17,7 @@ const Herobanner = () => {
     setBackground(bg)
   }, [data])
 
-  console.log(background)
+  // console.log(background)
   const searchQueryHandler = (event) => {
     if (event.key === 'Enter' && query.length > 0) {
       navigate(`/search/${query}`)
@@ -34,8 +34,8 @@ const Herobanner = () => {
       </div>
       <ContentWrapper>
         <div className="heroBannerContent">
-          <span className="title">Welcome</span>
-          <span className="subTitle">MovieZone is an Indian subscription video on-demand over-the-top streaming service owned by The Walt M ovieZone Company India and operated by MovieZone Streaming</span>
+          <span className="title">Welcome !!</span>
+          <span className="subTitle">MovieCluB is an Indian subscription video on-demand over-the-top streaming service owned by The Walt MovieCluB Company India and operated by MovieCluB Streaming</span>
           <div className="searchInput">
             <input type="text" placeholder='Search for movie or Tv show....' onChange={(e) => setQuery(e.target.value)} onKeyUp={searchQueryHandler} />
             <button>Search</button>
