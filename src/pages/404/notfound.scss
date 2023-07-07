@@ -1,6 +1,36 @@
-.notfoundDiv{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+@import "../../mixins.scss";
+.notfoundDiv {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img{
+            width: 50%;
+        }
+        @include md{
+                img{
+                    width: 400px;
+                }
+        }
+    }
 
-}
+    // adding animation for image
+    $animation-duration: 2s;
+    $zoom-factor: 1.2;
+
+    @mixin zoom-animation($from, $to) {
+        @keyframes zoom {
+            from {
+                transform: scale($from);
+            }
+
+            to {
+                transform: scale($to);
+            }
+        }
+    }
+
+    .notfoundDiv {
+        animation: zoom $animation-duration infinite alternate;
+
+        @include zoom-animation(1, $zoom-factor);
+    }
