@@ -34,11 +34,11 @@ const Herobanner = () => {
       </div>
       <ContentWrapper>
         <div className="heroBannerContent">
-          <span className="title">Welcome !!</span>
+          <div className="title">Welcome !!</div>
           <span className="subTitle">MovieCluB is an Indian subscription video on-demand over-the-top streaming service owned by The Walt MovieCluB Company India and operated by MovieCluB Streaming</span>
           <div className="searchInput">
             <input type="text" placeholder='Search for movie or Tv show....' onChange={(e) => setQuery(e.target.value)} onKeyUp={searchQueryHandler} />
-            <button>Search</button>
+            <button onClick={()=>navigate(`search/${query}`)}>Search</button>
           </div>
         </div>
         </ContentWrapper>

@@ -53,13 +53,15 @@
         max-width: 800px;
         margin: 0 auto;
 
+ 
+
         .title {
             font-size: 50px;
             font-weight: 700;
             margin-bottom: 10px;
 
             @include md {
-                margin-bottom: 0;
+                margin-bottom: 5px;
                 font-size: 90px;
 
             }
